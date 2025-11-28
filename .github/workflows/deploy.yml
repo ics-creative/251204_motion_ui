@@ -32,13 +32,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: "20"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
+        env:
+          # リポジトリ名をベースパスとして設定
+          # github.repositoryは"owner/repo"形式なので、リポジトリ名だけを取得
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
         run: pnpm run build
 
       - name: Setup Pages
@@ -47,7 +51,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: "./dist"
 
   deploy:
     environment:
@@ -59,4 +63,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

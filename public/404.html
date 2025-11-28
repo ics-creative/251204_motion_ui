@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -11,17 +11,15 @@
       const path = window.location.pathname;
       const search = window.location.search;
       const hash = window.location.hash;
-      
-      // 現在のパスから404.htmlを除いて、index.htmlにリダイレクト
+
+      // 404.htmlをindex.htmlに置き換えてリダイレクト
       // パス、クエリパラメータ、ハッシュを保持
-      const newPath = path.replace(/\/404\.html$/, '') || '/';
-      window.location.replace(
-        `${window.location.origin}${newPath}/index.html${search}${hash}`
-      );
+      // 例: /リポジトリ名/some-route → /リポジトリ名/index.html#/some-route
+      const newPath = path.replace(/\/404\.html$/, "").replace(/\/$/, "") || "/";
+      window.location.replace(`${window.location.origin}${newPath}/index.html${search}${hash}`);
     </script>
   </head>
   <body>
     <p>Redirecting...</p>
   </body>
 </html>
-
