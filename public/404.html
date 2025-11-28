@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI with Motion</title>
+    <script>
+      // SPAのルーティングに対応するため、404エラー時にindex.htmlにリダイレクト
+      // GitHub Pagesは404エラーが発生すると404.htmlを表示するため、
+      // このファイルでindex.htmlにリダイレクトすることで、SPAのルーティングが正しく動作する
+      const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
+      
+      // 現在のパスから404.htmlを除いて、index.htmlにリダイレクト
+      // パス、クエリパラメータ、ハッシュを保持
+      const newPath = path.replace(/\/404\.html$/, '') || '/';
+      window.location.replace(
+        `${window.location.origin}${newPath}/index.html${search}${hash}`
+      );
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
+
