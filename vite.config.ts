@@ -12,7 +12,6 @@ export default defineConfig(({ mode }) => {
     build: {
       rollupOptions: {
         output: {
-          // ファイル名からハッシュ値を削除
           entryFileNames: "assets/[name].js",
           chunkFileNames: "assets/[name].js",
           assetFileNames: "assets/[name].[ext]",
