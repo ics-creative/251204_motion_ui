@@ -2,24 +2,13 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UI with Motion</title>
-    <script>
-      // SPAのルーティングに対応するため、404エラー時にindex.htmlにリダイレクト
-      // GitHub Pagesは404エラーが発生すると404.htmlを表示するため、
-      // このファイルでindex.htmlにリダイレクトすることで、SPAのルーティングが正しく動作する
-      const path = window.location.pathname;
-      const search = window.location.search;
-      const hash = window.location.hash;
-
-      // 404.htmlをindex.htmlに置き換えてリダイレクト
-      // パス、クエリパラメータ、ハッシュを保持
-      // 例: /リポジトリ名/some-route → /リポジトリ名/index.html#/some-route
-      const newPath = path.replace(/\/404\.html$/, "").replace(/\/$/, "") || "/";
-      window.location.replace(`${window.location.origin}${newPath}/index.html${search}${hash}`);
-    </script>
+    <script type="module" crossorigin src="./assets/index-C42avtUG.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-8Pw0QwIh.css">
   </head>
   <body>
-    <p>Redirecting...</p>
+    <div id="root"></div>
   </body>
 </html>
