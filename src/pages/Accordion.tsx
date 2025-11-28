@@ -2,16 +2,20 @@ import { AnimatePresence, motion, type AnimationDefinition } from "motion/react"
 import { type MouseEvent, useRef, useState } from "react";
 
 export const Accordion = () => {
+  // アコーディオンの開閉状態を管理するstate
   const [isOpen, setIsOpen] = useState(false);
 
+  // HTMLのdetails要素への参照を保持
   const detailsRef = useRef<HTMLDetailsElement>(null);
 
-  // アコーディオンをトグルする
+  // アコーディオンをトグル（開閉を切り替え）する関数
   const handleToggle = (event: MouseEvent<HTMLDetailsElement>) => {
     event.preventDefault();
     // アコーディオンが閉じている場合は開く動作
     if (!detailsRef.current?.open) {
       setIsOpen(true);
+      // 次のフレームでdetails要素を開く
+      // これにより、AnimatePresenceがマウントされてからdetails要素を開くことができる
       requestAnimationFrame(() => {
         if (detailsRef.current) {
           detailsRef.current.open = true;
@@ -23,8 +27,9 @@ export const Accordion = () => {
     }
   };
 
-  // アコーディオンアニメーションが完了したら、アコーディオンを閉じる
+  // アコーディオンアニメーションが完了したときに呼ばれる関数
   const handleAnimationComplete = (definition: AnimationDefinition) => {
+    // 閉じるアニメーション（"closed"）が完了したら、実際にdetails要素を閉じる
     if (definition === "closed") {
       if (detailsRef.current) {
         detailsRef.current.open = false;
@@ -34,8 +39,9 @@ export const Accordion = () => {
 
   // アコーディオンアニメーションの定義
   const variants = {
-    open: { opacity: 1, height: "auto" },
-    closed: { opacity: 0, height: 0 },
+    open: { opacity: 1, height: "auto" }, // 開いた状態: 不透明度1、高さは自動
+    closed: { opacity: 0, height: 0 }, // 閉じた状態: 不透明度0、高さ0
+    transition: { duration: 0.3 }, // アニメーション時間: 0.3秒
   };
 
   return (
@@ -52,10 +58,9 @@ export const Accordion = () => {
               <motion.div
                 className="accordionContent"
                 variants={variants}
-                initial={{ height: 0, opacity: 0 }}
+                initial={variants.closed}
                 animate="open"
                 exit="closed"
-                transition={{ duration: 0.3 }}
                 onAnimationComplete={handleAnimationComplete}
               >
                 <p className="accordionText">

@@ -2,34 +2,45 @@ import { animate, motion, useMotionValue, useTransform, type Variants } from "mo
 import { EASE_OUT_EXPO, EASE_OUT_QUART } from "../assets/easing";
 import { useState } from "react";
 
+// タスクの総数
 const ALL_TASKS = 256;
+// 未開始のタスク数
 const NOT_STARTED_VALUE = 53;
+// 進行中のタスク数
 const IN_PROGRESS_VALUE = 40;
+// 完了したタスク数
 const COMPLETED_VALUE = 163;
+// 進捗率を計算（完了数 / 総数）
 const PROGRESS_RATE = COMPLETED_VALUE / ALL_TASKS;
 
 export const ProgressRate = () => {
-  const progressRate = useMotionValue(0);
-  const notStartedValue = useMotionValue(0);
-  const inProgressValue = useMotionValue(0);
-  const completedValue = useMotionValue(0);
+  // アニメーション用の値を管理（初期値は0）
+  // useMotionValueでアニメーション可能な値を生成
+  const progressRate = useMotionValue(0); // 進捗率（0-100%）
+  const notStartedValue = useMotionValue(0); // 未開始タスク数
+  const inProgressValue = useMotionValue(0); // 進行中タスク数
+  const completedValue = useMotionValue(0); // 完了タスク数
 
+  // 表示用の値を計算（小数点を四捨五入して整数に変換）
   const rate = useTransform(() => Math.round(progressRate.get()));
   const notStartedCount = useTransform(() => Math.round(notStartedValue.get()));
   const inProgressCount = useTransform(() => Math.round(inProgressValue.get()));
   const completedCount = useTransform(() => Math.round(completedValue.get()));
 
+  // SVGパス（円形の線）のアニメーション設定
   const drawPathVariants: Variants = {
-    hidden: { pathLength: 0 },
+    hidden: { pathLength: 0 }, // 初期状態: パスの長さが0（線が表示されない）
     visible: {
-      pathLength: PROGRESS_RATE,
-      transition: { duration: 1.8, ease: EASE_OUT_QUART },
+      pathLength: PROGRESS_RATE, // 最終状態: 進捗率分だけパスを描画
+      transition: { duration: 1.8, ease: EASE_OUT_QUART }, // 1.8秒かけてアニメーション
     },
   };
-  
+
+  // 各値を目標値までアニメーション
+  // animate: motion valueを指定した値までアニメーションさせる
   animate(progressRate, PROGRESS_RATE * 100, {
-    duration: 1.8,
-    ease: EASE_OUT_EXPO,
+    duration: 1.8, // アニメーション時間（秒）
+    ease: EASE_OUT_EXPO, // イージング関数（減速する動き）
   });
   animate(notStartedValue, NOT_STARTED_VALUE, {
     duration: 1.8,
@@ -44,10 +55,15 @@ export const ProgressRate = () => {
     ease: EASE_OUT_EXPO,
   });
 
+  // アニメーションを再実行するためのキー
+  // keyを変更することで、コンポーネントを再マウントしてアニメーションをリセット
   const [animationKey, setAnimationKey] = useState<number>(0);
 
+  // Replayボタンがクリックされたときの処理
   const handleReplay = () => {
+    // キーを変更してコンポーネントを再マウント（アニメーションをリセット）
     setAnimationKey(prev => prev + 1);
+    // すべてのmotion valueを0にリセット（アニメーションの開始位置に戻す）
     progressRate.set(0);
     notStartedValue.set(0);
     inProgressValue.set(0);

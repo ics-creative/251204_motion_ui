@@ -12,18 +12,23 @@ export const Home = () => {
             </Link>
           </li>
           <li>
-            <Link to="/modal-dialog" className="indexListLink">
-              Modal Dialog
-            </Link>
-          </li>
-          <li>
             <Link to="/ripple-button" className="indexListLink">
               Ripple Button
             </Link>
           </li>
           <li>
+            <Link to="/modal-dialog" className="indexListLink">
+              Modal Dialog
+            </Link>
+          </li>
+          <li>
             <Link to="/accordion" className="indexListLink">
               Accordion
+            </Link>
+          </li>
+          <li>
+            <Link to="/segment-button" className="indexListLink">
+              Segment Button
             </Link>
           </li>
           <li>
@@ -39,11 +44,6 @@ export const Home = () => {
           <li>
             <Link to="/progress-rate" className="indexListLink">
               Progress Rate
-            </Link>
-          </li>
-          <li>
-            <Link to="/segment-button" className="indexListLink">
-              Segment Button
             </Link>
           </li>
         </ul>
