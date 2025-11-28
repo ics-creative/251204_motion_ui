@@ -42,7 +42,7 @@ jobs:
         env:
           # リポジトリ名をベースパスとして設定
           # github.repositoryは"owner/repo"形式なので、リポジトリ名だけを取得
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_BASE_PATH: ${{ github.event.repository.name }}
         run: pnpm run build
 
       - name: Setup Pages
