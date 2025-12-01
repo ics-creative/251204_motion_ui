@@ -2,6 +2,30 @@ import { AnimatePresence, motion, stagger } from "motion/react";
 import { useState } from "react";
 import arrowDown from "../assets/arrow_down.svg";
 
+// ドロップダウンメニューのアイテム
+const BROWSERS = [
+  {
+    name: "Google Chrome",
+    value: "chrome",
+  },
+  {
+    name: "Firefox",
+    value: "firefox",
+  },
+  {
+    name: "Safari",
+    value: "safari",
+  },
+  {
+    name: "Edge",
+    value: "edge",
+  },
+  {
+    name: "Opera",
+    value: "opera",
+  },
+];
+
 export const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -68,46 +92,17 @@ export const Dropdown = () => {
                 exit="closed"
                 role="menu"
               >
-                <motion.button
-                  className="dropdownItemButton"
-                  role="menuitem" // アクセシビリティ: メニュー項目であることを示す
-                  onClick={handleClose}
-                  variants={buttonVariants} // ボタンのアニメーション設定
-                >
-                  Google Chrome
-                </motion.button>
-                <motion.button
-                  className="dropdownItemButton"
-                  role="menuitem"
-                  onClick={handleClose}
-                  variants={buttonVariants}
-                >
-                  Firefox
-                </motion.button>
-                <motion.button
-                  className="dropdownItemButton"
-                  role="menuitem"
-                  onClick={handleClose}
-                  variants={buttonVariants}
-                >
-                  Safari
-                </motion.button>
-                <motion.button
-                  className="dropdownItemButton"
-                  role="menuitem"
-                  onClick={handleClose}
-                  variants={buttonVariants}
-                >
-                  Edge
-                </motion.button>
-                <motion.button
-                  className="dropdownItemButton"
-                  role="menuitem"
-                  onClick={handleClose}
-                  variants={buttonVariants}
-                >
-                  Opera
-                </motion.button>
+                {BROWSERS.map(browser => (
+                  <motion.button
+                    key={browser.value}
+                    className="dropdownItemButton"
+                    role="menuitem"
+                    onClick={handleClose}
+                    variants={buttonVariants}
+                  >
+                    {browser.name}
+                  </motion.button>
+                ))}
               </motion.div>
             )}
           </AnimatePresence>
