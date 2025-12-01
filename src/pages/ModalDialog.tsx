@@ -1,6 +1,5 @@
 import { AnimatePresence, motion, type AnimationDefinition } from "motion/react";
 import { type MouseEvent, useRef, useState } from "react";
-import "../assets/modalDialog.css";
 
 export const ModalDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
