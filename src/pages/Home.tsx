@@ -17,13 +17,13 @@ export const Home = () => {
             </Link>
           </li>
           <li>
-            <Link to="/accordion" className="indexListLink">
-              Accordion
+            <Link to="/modal-dialog" className="indexListLink">
+              Modal Dialog
             </Link>
           </li>
           <li>
-            <Link to="/modal-dialog" className="indexListLink">
-              Modal Dialog
+            <Link to="/accordion" className="indexListLink">
+              Accordion
             </Link>
           </li>
           <li>
@@ -32,8 +32,8 @@ export const Home = () => {
             </Link>
           </li>
           <li>
-            <Link to="/list" className="indexListLink">
-              List
+            <Link to="/scroll-triggered-animation" className="indexListLink">
+              Scroll Triggered Animation
             </Link>
           </li>
           <li>

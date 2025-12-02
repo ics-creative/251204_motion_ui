@@ -1,6 +1,6 @@
 import { animate, motion, useMotionValue, useTransform, type Variants } from "motion/react";
 import { EASE_OUT_EXPO, EASE_OUT_QUART } from "../assets/easing";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // タスクの総数
 const ALL_TASKS = 256;
@@ -36,25 +36,6 @@ export const ProgressRate = () => {
     },
   };
 
-  // 各値を目標値までアニメーション
-  // animate: motion valueを指定した値までアニメーションさせる
-  animate(progressRate, PROGRESS_RATE * 100, {
-    duration: 1.8, // アニメーション時間（秒）
-    ease: EASE_OUT_EXPO, // イージング関数（減速する動き）
-  });
-  animate(notStartedValue, NOT_STARTED_VALUE, {
-    duration: 1.8,
-    ease: EASE_OUT_EXPO,
-  });
-  animate(inProgressValue, IN_PROGRESS_VALUE, {
-    duration: 1.8,
-    ease: EASE_OUT_EXPO,
-  });
-  animate(completedValue, COMPLETED_VALUE, {
-    duration: 1.8,
-    ease: EASE_OUT_EXPO,
-  });
-
   // アニメーションを再実行するためのキー
   // keyを変更することで、コンポーネントを再マウントしてアニメーションをリセット
   const [animationKey, setAnimationKey] = useState<number>(0);
@@ -69,6 +50,33 @@ export const ProgressRate = () => {
     inProgressValue.set(0);
     completedValue.set(0);
   };
+
+  useEffect(() => {
+    // 各値を目標値までアニメーション
+    // animate: motion valueを指定した値までアニメーションさせる
+    const progressRateAnimation = animate(progressRate, PROGRESS_RATE * 100, {
+      duration: 1.8, // アニメーション時間（秒）
+      ease: EASE_OUT_EXPO, // イージング関数（減速する動き）
+    });
+    const notStartedValueAnimation = animate(notStartedValue, NOT_STARTED_VALUE, {
+      duration: 1.8,
+      ease: EASE_OUT_EXPO,
+    });
+    const inProgressValueAnimation = animate(inProgressValue, IN_PROGRESS_VALUE, {
+      duration: 1.8,
+      ease: EASE_OUT_EXPO,
+    });
+    const completedValueAnimation = animate(completedValue, COMPLETED_VALUE, {
+      duration: 1.8,
+      ease: EASE_OUT_EXPO,
+    });
+    return () => {
+      progressRateAnimation.stop();
+      notStartedValueAnimation.stop();
+      inProgressValueAnimation.stop();
+      completedValueAnimation.stop();
+    };
+  }, [animationKey]);
   return (
     <div>
       <h1 className="pageTitle">Progress Rate</h1>

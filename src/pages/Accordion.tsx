@@ -1,4 +1,4 @@
-import { motion, type AnimationDefinition } from "motion/react";
+import { AnimatePresence, motion, type AnimationDefinition } from "motion/react";
 import { type MouseEvent, useRef, useState } from "react";
 
 export const Accordion = () => {
@@ -23,6 +23,8 @@ export const Accordion = () => {
     }
   };
 
+  // アコーディオンをトグルするときに呼ばれる関数
+  // こちらはページ内検索などで受動的にアコーディオンが開閉するときに呼ばれる関数です。
   const handleToggle = () => {
     if (detailsRef.current) {
       setIsOpen(detailsRef.current.open);
@@ -51,6 +53,12 @@ export const Accordion = () => {
     },
   };
 
+  const iconVariants = {
+    open: { opacity: 1 },
+    closed: { opacity: 0 },
+    transition: { duration: 0.3 },
+  };
+
   return (
     <div>
       <h1 className="pageTitle">Accordion</h1>
@@ -58,7 +66,31 @@ export const Accordion = () => {
         <details ref={detailsRef} className="accordion" onToggle={handleToggle}>
           <summary onClick={handleClick} className="accordionSummary">
             Q. Where can I find high-quality information about the web?
-            <span className="accordionIcon">{isOpen ? "-" : "+"}</span>
+            <AnimatePresence initial={false}>
+              {isOpen ? (
+                <motion.span
+                  className="accordionIcon"
+                  variants={iconVariants}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  key="closed"
+                >
+                  -
+                </motion.span>
+              ) : (
+                <motion.span
+                  className="accordionIcon"
+                  variants={iconVariants}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  key="open"
+                >
+                  +
+                </motion.span>
+              )}
+            </AnimatePresence>
           </summary>
           <motion.div
             className="accordionContent"

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, type AnimationDefinition } from "motion/react";
+import { motion, type AnimationDefinition } from "motion/react";
 import { type MouseEvent, useRef, useState } from "react";
 
 export const ModalDialog = () => {
@@ -9,17 +9,19 @@ export const ModalDialog = () => {
 
   // モーダルを開く関数
   const handleOpen = () => {
-    setIsOpen(true);
-    // 次のフレームでshowModal()を呼び出して、AnimatePresenceがマウントされるのを待つ
-    // これにより、AnimatePresenceがマウントされてからdialog要素を開くことができる
-    requestAnimationFrame(() => {
-      modalDialogRef.current?.showModal();
-    });
+    modalDialogRef.current?.showModal();
   };
 
   // モーダルを閉じる関数
   const handleClose = () => {
     setIsOpen(false);
+  };
+
+  // モーダルが開閉したときに呼ばれる関数
+  const handleToggle = () => {
+    if (modalDialogRef.current?.open) {
+      setIsOpen(modalDialogRef.current.open);
+    }
   };
 
   // オーバーレイ（背景）をクリックしたときの処理
@@ -59,8 +61,8 @@ export const ModalDialog = () => {
 
   // オーバーレイ（背景）のアニメーション定義
   const backdropVariants = {
-    visible: { opacity: 1 },
-    hidden: { opacity: 0 },
+    visible: { opacity: 1, visibility: "visible" },
+    hidden: { opacity: 0, visibility: "hidden" },
     transition: { duration: 0.2 },
   };
 
@@ -71,38 +73,33 @@ export const ModalDialog = () => {
         <button className="basicButton" onClick={handleOpen}>
           Open Modal
         </button>
-
-        <AnimatePresence>
-          {isOpen && (
-            <>
-              <motion.div
-                className="modalBackdrop"
-                variants={backdropVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-              />
-              <motion.dialog
-                className="modalContent"
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                ref={modalDialogRef}
-                onAnimationComplete={handleAnimationComplete}
-                onClick={handleOverlayClick}
-              >
-                <div className="modalContentInner">
-                  <h2>Modal Dialog</h2>
-                  <p>This is the content of the modal dialog.</p>
-                  <button className="basicButton" onClick={handleClose}>
-                    Close
-                  </button>
-                </div>
-              </motion.dialog>
-            </>
-          )}
-        </AnimatePresence>
+        <div>
+          <motion.div
+            className="modalBackdrop"
+            variants={backdropVariants}
+            initial="hidden"
+            animate={isOpen ? "visible" : "hidden"}
+            exit="hidden"
+          />
+          <motion.dialog
+            className="modalContent"
+            variants={modalVariants}
+            animate={isOpen ? "visible" : "hidden"}
+            ref={modalDialogRef}
+            onAnimationComplete={handleAnimationComplete}
+            onClick={handleOverlayClick}
+            onToggle={handleToggle}
+            exit="hidden"
+          >
+            <div className="modalContentInner">
+              <h2>Modal Dialog</h2>
+              <p>This is the content of the modal dialog.</p>
+              <button className="basicButton" onClick={handleClose}>
+                Close
+              </button>
+            </div>
+          </motion.dialog>
+        </div>
       </div>
     </div>
   );

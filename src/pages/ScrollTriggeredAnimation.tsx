@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
 import { presidentList } from "../data/presidentList";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export const List = () => {
+export const ScrollTriggeredAnimation = () => {
   const listContainerRef = useRef<HTMLDivElement>(null);
 
   const variants = {
@@ -10,19 +10,23 @@ export const List = () => {
     visible: { opacity: 1, y: 0, filter: "blur(0px)" },
   };
 
+  const [animationKey, setAnimationKey] = useState<number>(0);
+
+  const resetAnimation = () => {
+    setAnimationKey(prev => prev + 1);
+  };
+
   useEffect(() => {
     if (listContainerRef.current) {
       listContainerRef.current.scrollTop = 0;
     }
-  }, []);
+  }, [animationKey]);
 
   return (
     <div>
-      <h1 className="pageTitle">リスト</h1>
-
+      <h1 className="pageTitle">Scroll Triggered Animation</h1>
       <div className="contentsContainer">
-        {/* <button className="basicButton">再生</button> */}
-        <div className="listContainer" ref={listContainerRef}>
+        <div className="listContainer" ref={listContainerRef} key={animationKey}>
           <div className="listHeader">
             <span className="listHeaderIndex">No.</span>
             <span className="listHeaderName">Name</span>
@@ -32,7 +36,7 @@ export const List = () => {
           <ul className="listItems">
             {presidentList.map((item, index) => (
               <motion.li
-                key={item.name}
+                key={index}
                 className="listItem"
                 variants={variants}
                 initial="invisible"
@@ -52,6 +56,9 @@ export const List = () => {
             ))}
           </ul>
         </div>
+        <button onClick={resetAnimation} className="basicButton resetButton">
+          Reset
+        </button>
       </div>
     </div>
   );
