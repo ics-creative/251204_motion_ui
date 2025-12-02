@@ -24,8 +24,8 @@ export const ModalDialog = () => {
     }
   };
 
-  // オーバーレイ（背景）をクリックしたときの処理
-  const handleOverlayClick = (event: MouseEvent<HTMLDialogElement>) => {
+  // dialog要素のbackdropをクリックしたときの処理
+  const handleBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
     // dialog要素のクリックイベントで、backdropをクリックした場合
     // dialog内部については.modalContentInnerが覆っているのでevent.targetがdialog要素になることはない
     // つまりbackdropをクリックしたときのみevent.target === event.currentTargetとなる
@@ -87,7 +87,7 @@ export const ModalDialog = () => {
             animate={isOpen ? "visible" : "hidden"}
             ref={modalDialogRef}
             onAnimationComplete={handleAnimationComplete}
-            onClick={handleOverlayClick}
+            onClick={handleBackdropClick}
             onToggle={handleToggle}
             exit="hidden"
           >
