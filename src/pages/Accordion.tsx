@@ -11,11 +11,14 @@ export const Accordion = () => {
   // アコーディオンをクリックしてトグル（開閉を切り替え）する関数
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
+
+    const detailsElement = detailsRef.current;
+    if (!detailsElement) {
+      return;
+    }
     // アコーディオンが閉じている場合は開く動作
-    if (!detailsRef.current?.open) {
-      if (detailsRef.current) {
-        detailsRef.current.open = true;
-      }
+    if (!detailsElement.open) {
+      detailsElement.open = true;
     } else {
       // アコーディオンが開いている場合は閉じる動作
       setIsOpen(false);
@@ -25,8 +28,9 @@ export const Accordion = () => {
   // アコーディオンをトグルするときに呼ばれる関数
   // こちらはページ内検索などで受動的にアコーディオンが開閉するときに呼ばれる関数です。
   const handleToggle = () => {
-    if (detailsRef.current) {
-      setIsOpen(detailsRef.current.open);
+    const detailsElement = detailsRef.current;
+    if (detailsElement) {
+      setIsOpen(detailsElement.open);
     }
   };
 
