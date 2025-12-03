@@ -6,7 +6,7 @@ import "./assets/rippleButton.css";
 import "./assets/accordion.css";
 import "./assets/scrollTriggeredAnimation.css";
 import "./assets/modalDialog.css";
-import "./assets/dropdown.css";
+import "./assets/hamburgerMenu.css";
 import "./assets/progressRate.css";
 import "./assets/segmentButton.css";
 import App from "./App.tsx";

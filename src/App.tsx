@@ -6,8 +6,8 @@ import { RippleButton } from "./pages/RippleButton";
 import { ModalDialog } from "./pages/ModalDialog";
 import { Accordion } from "./pages/Accordion";
 import { ScrollTriggeredAnimation } from "./pages/ScrollTriggeredAnimation";
-import { Dropdown } from "./pages/Dropdown";
-import { ProgressRate } from "./pages/ProgressRate";
+import { HamburgerMenu } from "./pages/HamburgerMenu";
+import { SvgAndValues } from "./pages/SvgAndValues";
 import { SegmentButton } from "./pages/SegmentButton";
 
 const App = () => {
@@ -23,8 +23,8 @@ const App = () => {
             <Route path="/modal-dialog" element={<ModalDialog />} />
             <Route path="/accordion" element={<Accordion />} />
             <Route path="/scroll-triggered-animation" element={<ScrollTriggeredAnimation />} />
-            <Route path="/dropdown" element={<Dropdown />} />
-            <Route path="/progress-rate" element={<ProgressRate />} />
+            <Route path="/hamburger-menu" element={<HamburgerMenu />} />
+            <Route path="/svg-and-values" element={<SvgAndValues />} />
             <Route path="/segment-button" element={<SegmentButton />} />
           </Routes>
         </main>

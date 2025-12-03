@@ -13,7 +13,7 @@ const COMPLETED_VALUE = 163;
 // 進捗率を計算（完了数 / 総数）
 const PROGRESS_RATE = COMPLETED_VALUE / ALL_TASKS;
 
-export const ProgressRate = () => {
+export const SvgAndValues = () => {
   // アニメーション用の値を管理（初期値は0）
   // useMotionValueでアニメーション可能な値を生成
   const progressRate = useMotionValue(0); // 進捗率（0-100%）
@@ -79,7 +79,7 @@ export const ProgressRate = () => {
   }, [animationKey]);
   return (
     <div>
-      <h1 className="pageTitle">Progress Rate</h1>
+      <h1 className="pageTitle">SVG & Values</h1>
       <div className="contentsContainer">
         <div className="progressRateContainer" key={animationKey}>
           <div className="donutChartContainer">

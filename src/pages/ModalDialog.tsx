@@ -56,14 +56,12 @@ export const ModalDialog = () => {
       x: "-50%", // x位置: -50%（中央揃えのため）
       y: "-50%", // y位置: -50%（中央揃えのため）
     },
-    transition: { duration: 0.2 }, // アニメーション時間: 0.2秒
   };
 
   // オーバーレイ（背景）のアニメーション定義
   const backdropVariants = {
     visible: { opacity: 1, visibility: "visible" },
     hidden: { opacity: 0, visibility: "hidden" },
-    transition: { duration: 0.2 },
   };
 
   return (
@@ -79,17 +77,17 @@ export const ModalDialog = () => {
             variants={backdropVariants}
             initial="hidden"
             animate={isOpen ? "visible" : "hidden"}
-            exit="hidden"
+            transition={{ duration: 0.2 }}
           />
           <motion.dialog
             className="modalContent"
             variants={modalVariants}
             animate={isOpen ? "visible" : "hidden"}
+            transition={{ duration: 0.2 }}
             ref={modalDialogRef}
             onAnimationComplete={handleAnimationComplete}
             onClick={handleBackdropClick}
             onToggle={handleToggle}
-            exit="hidden"
           >
             <div className="modalContentInner">
               <h2>Modal Dialog</h2>

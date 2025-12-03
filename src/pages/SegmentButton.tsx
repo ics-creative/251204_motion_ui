@@ -17,19 +17,15 @@ export const SegmentButton = () => {
   const variants: Variants = {
     daily: {
       x: 0, // 最初のボタンの位置（X座標0）
-      transition: { duration: 0.3, ease: EASE_OUT_QUART },
     },
     weekly: {
       x: 120, // 2番目のボタンの位置（X座標120px）
-      transition: { duration: 0.3, ease: EASE_OUT_QUART },
     },
     monthly: {
       x: 240, // 3番目のボタンの位置（X座標240px）
-      transition: { duration: 0.3, ease: EASE_OUT_QUART },
     },
     yearly: {
       x: 360, // 4番目のボタンの位置（X座標360px）
-      transition: { duration: 0.3, ease: EASE_OUT_QUART },
     },
   };
 
@@ -42,6 +38,7 @@ export const SegmentButton = () => {
             className="segmentButtonBackground"
             variants={variants}
             animate={activeSegment}
+            transition={{ duration: 0.3, ease: EASE_OUT_QUART }}
           ></motion.div>
           {SEGMENT_BUTTON_LIST.map(segment => (
             <button

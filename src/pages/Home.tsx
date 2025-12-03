@@ -37,13 +37,13 @@ export const Home = () => {
             </Link>
           </li>
           <li>
-            <Link to="/dropdown" className="indexListLink">
-              Dropdown
+            <Link to="/hamburger-menu" className="indexListLink">
+              Hamburger Menu
             </Link>
           </li>
           <li>
-            <Link to="/progress-rate" className="indexListLink">
-              Progress Rate
+            <Link to="/svg-and-values" className="indexListLink">
+              SVG & Values
             </Link>
           </li>
         </ul>

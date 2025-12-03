@@ -56,7 +56,6 @@ export const Accordion = () => {
   const iconVariants = {
     open: { opacity: 1 },
     closed: { opacity: 0 },
-    transition: { duration: 0.3 },
   };
 
   return (
@@ -74,6 +73,7 @@ export const Accordion = () => {
                   initial="closed"
                   animate="open"
                   exit="closed"
+                  transition={{ duration: 0.3 }}
                   key="closed"
                 >
                   -
