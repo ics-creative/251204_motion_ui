@@ -26,22 +26,22 @@ const MENU_ITEMS = [
 export const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // ドロップダウンをトグル（開閉を切り替え）する関数
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
+  // ハンバーガーメニューをトグル（開閉を切り替え）する関数
+  const handleOpen = () => {
+    setIsOpen(true);
   };
 
-  // ドロップダウンを閉じる関数
+  // ハンバーガーメニューを閉じる関数
   const handleClose = () => {
     setIsOpen(false);
   };
 
-  // ドロップダウンメニューのコンテナのアニメーション定義
+  // ハンバーガーメニュー内のアイテムのアニメーション定義
   const variants = {
     open: {
       transition: {
         // stagger: 子要素を順番にアニメーションさせる
-        // 0.05秒間隔で、最初の要素は0.1秒後に開始
+        // 0.08秒間隔で、最初の要素は0.2秒後に開始
         delayChildren: stagger(0.08, { startDelay: 0.2 }),
         ease: EASE_OUT_QUART,
         duration: 0.5,
@@ -72,7 +72,7 @@ export const HamburgerMenu = () => {
       <h1 className="pageTitle">Hamburger Menu</h1>
       <div className="contentsContainer">
         <div className="hamburgerMenuContainer">
-          <button className="basicButton hamburgerButton" onClick={handleToggle} aria-label="Menu">
+          <button className="basicButton hamburgerButton" onClick={handleOpen} aria-label="Menu">
             <img src={menu} alt="" width={24} height={24} className="hamburgerButtonIcon" />
           </button>
           <AnimatePresence>

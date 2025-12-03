@@ -9,9 +9,8 @@ export const Accordion = () => {
   const detailsRef = useRef<HTMLDetailsElement>(null);
 
   // アコーディオンをクリックしてトグル（開閉を切り替え）する関数
-  const handleClick = (event: MouseEvent<HTMLDetailsElement>) => {
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
-
     // アコーディオンが閉じている場合は開く動作
     if (!detailsRef.current?.open) {
       if (detailsRef.current) {
