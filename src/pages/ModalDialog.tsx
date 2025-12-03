@@ -10,18 +10,12 @@ export const ModalDialog = () => {
   // モーダルを開く関数
   const handleOpen = () => {
     modalDialogRef.current?.showModal();
+    setIsOpen(true);
   };
 
   // モーダルを閉じる関数
   const handleClose = () => {
     setIsOpen(false);
-  };
-
-  // モーダルが開閉したときに呼ばれる関数
-  const handleToggle = () => {
-    if (modalDialogRef.current?.open) {
-      setIsOpen(modalDialogRef.current.open);
-    }
   };
 
   // dialog要素のbackdropをクリックしたときの処理
@@ -87,7 +81,6 @@ export const ModalDialog = () => {
             ref={modalDialogRef}
             onAnimationComplete={handleAnimationComplete}
             onClick={handleBackdropClick}
-            onToggle={handleToggle}
           >
             <div className="modalContentInner">
               <h2>Modal Dialog</h2>
