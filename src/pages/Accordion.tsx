@@ -19,6 +19,7 @@ export const Accordion = () => {
     // アコーディオンが閉じている場合は開く動作
     if (!detailsElement.open) {
       detailsElement.open = true;
+      setIsOpen(true);
     } else {
       // アコーディオンが開いている場合は閉じる動作
       setIsOpen(false);
@@ -29,8 +30,8 @@ export const Accordion = () => {
   // こちらはページ内検索などで受動的にアコーディオンが開閉するときに呼ばれる関数です。
   const handleToggle = () => {
     const detailsElement = detailsRef.current;
-    if (detailsElement) {
-      setIsOpen(detailsElement.open);
+    if (detailsElement && detailsElement.open) {
+      setIsOpen(true);
     }
   };
 
