@@ -6,8 +6,8 @@ export const ScrollTriggeredAnimation = () => {
   const listContainerRef = useRef<HTMLDivElement>(null);
 
   const variants = {
-    invisible: { opacity: 0, y: 10, filter: "blur(0px)" },
-    visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+    invisible: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
   };
 
   const [animationKey, setAnimationKey] = useState<number>(0);
@@ -45,7 +45,6 @@ export const ScrollTriggeredAnimation = () => {
                 transition={{
                   opacity: { duration: 0.3 },
                   y: { duration: 0.4 },
-                  filter: { duration: 0.5 },
                 }}
               >
                 <span className="listItemIndex">{index + 1}</span>
