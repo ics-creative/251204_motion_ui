@@ -33,7 +33,7 @@ export const RippleButton = () => {
         <button
           className="basicButton rippleButton"
           ref={buttonElementRef}
-          onClick={event => handleClick(event)}
+          onClick={handleClick}
         >
           Click me
           {rippleAnimationKey > 0 && (
