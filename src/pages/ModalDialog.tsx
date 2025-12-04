@@ -1,5 +1,5 @@
 import { motion, type AnimationDefinition } from "motion/react";
-import { type MouseEvent, useRef, useState } from "react";
+import { type MouseEvent, type SyntheticEvent, useRef, useState } from "react";
 
 export const ModalDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,9 @@ export const ModalDialog = () => {
   };
 
   // モーダルを閉じる関数
-  const handleClose = event => {
+  const handleClose = (
+    event: SyntheticEvent<HTMLDialogElement> | MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
     setIsOpen(false);
   };
@@ -82,7 +84,7 @@ export const ModalDialog = () => {
             ref={modalDialogRef}
             onAnimationComplete={handleAnimationComplete}
             onClick={handleBackdropClick}
-            onCancel={handleClose}
+            onCancel={event => handleClose(event)}
           >
             <div className="modalContentInner">
               <h2>Modal Dialog</h2>
