@@ -30,11 +30,7 @@ export const RippleButton = () => {
     <div>
       <h1 className="pageTitle">Ripple Button</h1>
       <div className="contentsContainer">
-        <button
-          className="basicButton rippleButton"
-          ref={buttonElementRef}
-          onClick={handleClick}
-        >
+        <button className="basicButton rippleButton" ref={buttonElementRef} onClick={handleClick}>
           Click me
           {rippleAnimationKey > 0 && (
             <motion.span style={{ left: clickX, top: clickY }} className="rippleWrapperElement">

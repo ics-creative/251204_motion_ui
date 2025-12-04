@@ -14,7 +14,8 @@ export const ModalDialog = () => {
   };
 
   // モーダルを閉じる関数
-  const handleClose = () => {
+  const handleClose = event => {
+    event.preventDefault();
     setIsOpen(false);
   };
 
@@ -81,6 +82,7 @@ export const ModalDialog = () => {
             ref={modalDialogRef}
             onAnimationComplete={handleAnimationComplete}
             onClick={handleBackdropClick}
+            onCancel={handleClose}
           >
             <div className="modalContentInner">
               <h2>Modal Dialog</h2>
